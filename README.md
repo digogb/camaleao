@@ -39,8 +39,8 @@ Camaleao/
 
 1. **Clone o repositório**
 ```bash
-git clone <url-do-repositorio>
-cd Camaleao
+git clone https://github.com/digogb/camaleao.git
+cd camaleao
 ```
 
 2. **Crie um ambiente virtual** (recomendado)
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 
 Execute a interface gráfica:
 ```bash
-python build/blur_voice.py
+python main.py
 ```
 
 ### Modo Produção (Executável)
@@ -76,11 +76,8 @@ python build/build_exe.py
 
 ## 📦 Dependências
 
-- `sounddevice` - Captura e reprodução de áudio
-- `numpy` - Processamento numérico
-- `scipy` - Processamento de sinais
-- `Pillow` - Manipulação de imagens
-- `pyinstaller` - Geração de executáveis (dev)
+- `Pillow` - Manipulação de imagens para interface gráfica
+- `pyinstaller` - Geração de executáveis (dev only)
 
 ## ⚙️ Configuração
 
