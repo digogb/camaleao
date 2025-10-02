@@ -1,4 +1,4 @@
-# 🎭 Anonimizador - BlurCam & Voice Controller
+# 🦎 Camaleão - BlurCam & Voice Controller
 
 Sistema de anonimização de vídeo e voz em tempo real com interface gráfica moderna.
 
@@ -13,7 +13,7 @@ Sistema de anonimização de vídeo e voz em tempo real com interface gráfica m
 ## 🗂️ Estrutura do Projeto
 
 ```
-Anonimizador/
+Camaleao/
 ├── assets/
 │   ├── executables/       # Executáveis externos (BlurCamOptDbg.exe, ffplay.exe)
 │   └── icons/             # Ícones e imagens
@@ -40,7 +40,7 @@ Anonimizador/
 1. **Clone o repositório**
 ```bash
 git clone <url-do-repositorio>
-cd Anonimizador
+cd Camaleao
 ```
 
 2. **Crie um ambiente virtual** (recomendado)
