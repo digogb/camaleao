@@ -428,8 +428,9 @@ class ModernBlurCam:
         
         def run():
             try:
-                cmd = f'{self.audio_executable} -nodisp -autoexit -f dshow -i "audio={self.selected_audio_device}" -af "{self.audio_filters}"'
-                self.audio_process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                cmd = f'"{self.audio_executable}" -nodisp -autoexit -f dshow -i audio="{self.selected_audio_device}" -af {self.audio_filters}'
+                self.audio_process = subprocess.Popen(cmd, shell=True,
+                                                      creationflags=subprocess.CREATE_NO_WINDOW if sys.platform=="win32" else 0)
                 self.audio_pid = self.audio_process.pid
                 self.log_message(f"Modificador iniciado (PID: {self.audio_pid})")
                 self.log_message(self.audio_process.args)
