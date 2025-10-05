@@ -21,8 +21,12 @@ class ModernBlurCam:
         
         # Detecta se está rodando como executável ou script Python
         if getattr(sys, 'frozen', False):
-            # Rodando como executável
-            self.base_path = Path(sys.executable).parent
+            # Rodando como executável PyInstaller
+            # Usa _MEIPASS para arquivos empacotados, senão usa diretório do executável
+            if hasattr(sys, '_MEIPASS'):
+                self.base_path = Path(sys._MEIPASS)
+            else:
+                self.base_path = Path(sys.executable).parent
         else:
             # Rodando como script Python
             self.base_path = Path(__file__).parent.parent
@@ -38,7 +42,7 @@ class ModernBlurCam:
         self.audio_devices = []
         self.selected_audio_device = None
         self.audio_filters_male = 'highpass=f=60,asetrate=48000*0.700899,aresample=48000,atempo=1.122462,lowpass=f=7000,aformat=channel_layouts=mono'
-        self.audio_filters_female = 'highpass=f=60,asetrate=48000*1.3,aresample=48000,atempo=0.85,lowpass=f=7000,aformat=channel_layers=mono'
+        self.audio_filters_female = 'highpass=f=60,asetrate=48000*1.3,aresample=48000,atempo=0.85,lowpass=f=7000,aformat=channel_layouts=mono'
         self.audio_filters = self.audio_filters_male
 
         # Caminho para a imagem do ícone
@@ -93,7 +97,7 @@ class ModernBlurCam:
     def cleanup_orphaned_processes(self):
         if sys.platform == "win32":
             try:
-                subprocess.run(["taskkill", "/F", "/IM", self.video_executable], capture_output=True, text=True)
+                subprocess.run(["taskkill", "/F", "/IM", "BlurCamOptDbg.exe"], capture_output=True, text=True)
                 subprocess.run(["taskkill", "/F", "/IM", "ffplay.exe"], capture_output=True, text=True)
             except: pass
     
@@ -398,7 +402,7 @@ class ModernBlurCam:
             except: pass
         
         if sys.platform == "win32":
-            subprocess.run(["taskkill", "/F", "/IM", self.video_executable], capture_output=True, text=True)
+            subprocess.run(["taskkill", "/F", "/IM", "BlurCamOptDbg.exe"], capture_output=True, text=True)
         
         self.on_video_ended()
         self.log_message("Blur parado")
@@ -428,8 +432,14 @@ class ModernBlurCam:
         
         def run():
             try:
-                cmd = f'"{self.audio_executable}" -nodisp -autoexit -f dshow -i audio="{self.selected_audio_device}" -af {self.audio_filters}'
-                self.audio_process = subprocess.Popen(cmd, shell=True,
+                cmd = [
+                    self.audio_executable,
+                    '-nodisp', '-autoexit',
+                    '-f', 'dshow',
+                    '-i', f'audio={self.selected_audio_device}',
+                    '-af', self.audio_filters
+                ]
+                self.audio_process = subprocess.Popen(cmd,
                                                       creationflags=subprocess.CREATE_NO_WINDOW if sys.platform=="win32" else 0)
                 self.audio_pid = self.audio_process.pid
                 self.log_message(f"Modificador iniciado (PID: {self.audio_pid})")
