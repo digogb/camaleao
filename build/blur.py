@@ -192,7 +192,8 @@ def clean_build_files():
 def create_readme():
     """Cria um README para distribuição"""
     readme_content = """
-# BlurCam & Voice Controller
+
+# Camaleão
 
 ## 🎯 O que é?
 
@@ -203,8 +204,8 @@ Este programa permite:
 
 ## 🚀 Como usar?
 
-1. Execute BlurCamVoiceController.exe
-2. Selecione seu microfone na lista
+1. Execute o arquivo Camaleao.exe
+2. Em configurações, selecione seu microfone na lista
 3. Clique em "LIGAR TUDO" ou ligue cada recurso individualmente
 4. Entre na sua videochamada
 5. Quando terminar, clique em "DESLIGAR TUDO"
@@ -223,11 +224,15 @@ Funciona com:
 
 - Windows 7 ou superior
 - Câmera e microfone conectados
+- Driver UnityCapture instalado na máquina  
+- Virtual Audio Cable (VB-Audio) instalado na máquina
 
 ## 💡 Dicas
 
 - Teste antes de usar em reuniões importantes
 - Configure seu app de videochamada para usar "Unity Video Capture" como câmera
+- Configure seu app de videochamada para usar "Cable Output (VB-Audio Virtual Cable)" como microfone
+- Configure seu dispositivo de saída do windows para usar "Cable Input (VB-Audio Virtual Cable)" como saída
 - O microfone configurado no app será automaticamente modificado
 
 ## 🔒 Privacidade

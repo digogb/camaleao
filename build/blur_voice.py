@@ -35,8 +35,8 @@ class ModernBlurCam:
         self.audio_executable = str(self.base_path / "assets" / "executables" / "ffplay.exe")
 
         self.video_args = [
-            "--mode", "box", "--blur", "61",
-            "--capture-scale", "0.5", "--proc-scale", "0.5", "--frame-skip", "2"
+            "--threads", "1", "--mode", "box", "--blur", "90",
+            "--capture-scale", "0.4", "--proc-scale", "0.4", "--gamma", "0.8", "--dim", "0.22"
         ]
 
         self.audio_devices = []
@@ -170,9 +170,9 @@ class ModernBlurCam:
     def setup_gui(self):
         self.root = tk.Tk()
         self.root.title("Camaleão - Proteção de Privacidade")
-        self.root.geometry("750x750")
+        self.root.geometry("750x820")
         self.root.resizable(True, True)
-        self.root.minsize(700, 720)
+        self.root.minsize(700, 770)
         self.root.configure(bg=self.colors['bg'])
         
         # Definir ícone da janela
@@ -267,25 +267,7 @@ class ModernBlurCam:
         self.device_label.pack(side=tk.LEFT, padx=(8, 0))
         
         # Gender
-        tk.Label(ac, text="Tipo de Voz", font=("Segoe UI", 10, "bold"),
-                bg=self.colors['card'], fg=self.colors['text']).pack(anchor="w", pady=(0, 8))
         
-        gender_frame = tk.Frame(ac, bg=self.colors['card'])
-        gender_frame.pack(fill=tk.X, pady=(0, 12))
-        
-        self.male_btn = tk.Button(gender_frame, text="Masculino", font=("Segoe UI", 10),
-                                  bg=self.colors['secondary'], fg='white', relief=tk.FLAT,
-                                  activebackground=self.colors['secondary'], activeforeground='white',
-                                  cursor="hand2", bd=0,
-                                  command=lambda: self.select_gender("masculino"))
-        self.male_btn.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(0, 6), ipady=10)
-        
-        self.female_btn = tk.Button(gender_frame, text="Feminino", font=("Segoe UI", 10),
-                                    bg='#e2e8f0', fg=self.colors['text'], relief=tk.FLAT,
-                                    activebackground='#e2e8f0', activeforeground=self.colors['text'],
-                                    cursor="hand2", bd=0,
-                                    command=lambda: self.select_gender("feminino"))
-        self.female_btn.pack(side=tk.LEFT, expand=True, fill=tk.X, padx=(6, 0), ipady=10)
         
         self.audio_btn = self.create_rounded_button(ac, "LIGAR MODIFICAÇÃO DE VOZ", self.colors['secondary'], self.toggle_audio)
         self.audio_btn.pack(fill=tk.X, ipady=12)
@@ -317,7 +299,7 @@ class ModernBlurCam:
         tk.Label(lc, text="Log de Atividades", font=("Segoe UI", 12, "bold"),
                 bg=self.colors['card'], fg=self.colors['text']).pack(anchor="w", pady=(0, 10))
         
-        self.log_text = scrolledtext.ScrolledText(lc, height=4, font=("Consolas", 9),
+        self.log_text = scrolledtext.ScrolledText(lc, height=10, font=("Consolas", 9),
                                                   bg='#f7fafc', fg=self.colors['text'],
                                                   relief=tk.FLAT, wrap=tk.WORD,
                                                   highlightbackground=self.colors['border'],
