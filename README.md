@@ -34,6 +34,8 @@ Camaleao/
 ### Requisitos
 - Python 3.8+
 - Windows (para executáveis .exe)
+- Driver UnityCapture
+- Virtual Audio Cable (VB-Audio)
 
 ### Passos
 
